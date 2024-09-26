@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header class="top-nav">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo-img">
+            <h2 class="logo-text">MAC</h2>
+        </div>
+        <nav>
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('buy_stock') }}">Buy</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Dashboard</h1>
+        <div class="dashboard-summary">
+            <div class="summary-card">
+                <h2>Total Value</h2>
+                <p>${{ total_value }}</p>
+            </div>
+            <div class="summary-card">
+                <h2>Total Profit/Loss</h2>
+                <p class="{{ 'profit-positive' if total_profit_loss >= 0 else 'profit-loss' }}">
+                    ${{ total_profit_loss }}
+                </p>
+            </div>
+        </div>
+
+        <div class="portfolio">
+            <h2>Portfolio</h2>
+            <p>Click on a stock to sell it!</p>
+            {% for stock in portfolio %}
+            <div class="portfolio-item">
+                <span class="symbol">{{ stock.symbol }}</span>
+                <span class="current-value">{{ stock.current_value }} USD</span>
+                <span class="profit-loss {{ 'profit-positive' if stock.profit_loss >= 0 else 'profit-loss' }}">
+                    {{ stock.profit_loss }} USD
+                </span>
+                <span>{{ stock.total_shares }} units</span>
+                <a href="{{ url_for('sell_stock', symbol=stock.symbol) }}">Sell</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

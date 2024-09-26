@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Stocks</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header class="top-nav">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" class="logo-img">
+            <h2 class="logo-text">MAC</h2>
+        </div>
+        <nav>
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('buy_stock') }}">Buy</a>
+        </nav>
+    </header>
+
+    <div class="form-container">
+        <h1>Buy Stocks</h1>
+        <form method="POST">
+            <label for="symbol">NASDAQ Code</label>
+            <input type="text" id="symbol" name="symbol" placeholder="Enter a symbol to get a price" required>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="quantity">Quantity</label>
+                    <input type="number" id="quantity" name="quantity" min="1" value="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input type="text" id="price" name="price" readonly value="${{ stock_price }}">
+                </div>
+            </div>
+
+            <button type="submit" class="btn-primary">Buy</button>
+        </form>
+    </div>
+</body>
+</html>

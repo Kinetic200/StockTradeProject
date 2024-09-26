@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sell {{ symbol }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="modal-container">
+        <div class="modal">
+            <h1>Sell {{ symbol }}</h1>
+            <p>How many units would you like to sell?</p>
+            <p>You bought {{ stock.total_shares }} units at ${{ stock.buy_price }} USD</p>
+            
+            <form method="POST">
+                <input type="number" name="quantity" min="1" max="{{ stock.total_shares }}" required>
+                <div class="modal-buttons">
+                    <button type="submit" class="btn-primary">Sell</button>
+                    <a href="{{ url_for('dashboard') }}" class="btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
